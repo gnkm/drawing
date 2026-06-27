@@ -5,7 +5,7 @@ import { iconButtonClassName } from "@/ui";
 
 type KujiCardProps = {
   kuji: Kuji;
-  onRemove?: (id: string) => void;
+  onRemove: (id: string) => void;
 };
 
 export function KujiCard({ kuji, onRemove }: KujiCardProps) {
@@ -28,7 +28,7 @@ export function KujiCard({ kuji, onRemove }: KujiCardProps) {
         <button
           aria-label={`「${kuji.label}」を削除`}
           className={iconButtonClassName}
-          onClick={() => onRemove?.(kuji.id)}
+          onClick={() => onRemove(kuji.id)}
           type="button"
         >
           <X aria-hidden="true" className="size-4" />

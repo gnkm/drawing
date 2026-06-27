@@ -1,11 +1,15 @@
 import { buttonClassName, inputClassName } from "@/ui";
 
-export function AddKujiForm() {
+export function AddKujiForm({ onAdd }: { onAdd: (label: string) => void }) {
   return (
     <form
       className="space-y-3"
       onSubmit={(event) => {
         event.preventDefault();
+        const formData = new FormData(event.target as HTMLFormElement);
+        const label = formData.get("kuji-label") as string;
+        onAdd(label);
+        event.target.reset();
       }}
     >
       <div className="space-y-1.5">
@@ -21,7 +25,7 @@ export function AddKujiForm() {
           id="kuji-label"
           maxLength={20}
           name="kuji-label"
-          placeholder="景品名を入力…"
+          placeholder="ラベルを入力…"
           spellCheck={true}
           type="text"
         />

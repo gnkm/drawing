@@ -4,7 +4,7 @@ import { buttonClassName } from "@/ui";
 type DrawButtonProps = {
   className?: string;
   disabled?: boolean;
-  onDraw?: () => void;
+  onDraw: () => void;
 };
 
 export function DrawButton({

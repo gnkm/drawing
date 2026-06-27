@@ -4,9 +4,6 @@ import { DrawingLayout } from "@/components/drawing/drawing-layout";
 export function App() {
   return (
     <AppShell>
-      <a className="skip-link" href="#drawing-main">
-        メインコンテンツへスキップ
-      </a>
       <main
         className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6"
         id="drawing-main"

@@ -10,12 +10,16 @@ import { KujiCard } from "./kuji-card";
 
 type BoxOperationsSectionProps = {
   box: Kuji[];
-  onRemoveKuji?: (id: string) => void;
+  onRemove: (id: string) => void;
+  onDraw: () => void;
+  onClear: () => void;
 };
 
 export function BoxOperationsSection({
   box,
-  onRemoveKuji,
+  onRemove,
+  onDraw,
+  onClear,
 }: BoxOperationsSectionProps) {
   return (
     <section aria-labelledby="box-operations-heading" className={cardClassName}>
@@ -24,8 +28,12 @@ export function BoxOperationsSection({
       </h2>
       <div className="mt-4 space-y-4">
         <div className="grid grid-cols-2 gap-2">
-          <DrawButton className="w-full" />
-          <ClearButton className="w-full" />
+          <DrawButton
+            className="w-full"
+            disabled={box.length === 0}
+            onDraw={onDraw}
+          />
+          <ClearButton className="w-full" onClear={onClear} />
         </div>
         {box.length === 0 ? (
           <p className={emptyStateClassName}>
@@ -34,7 +42,7 @@ export function BoxOperationsSection({
         ) : (
           <ul className="flex list-none flex-col gap-2 p-0">
             {box.map((kuji) => (
-              <KujiCard key={kuji.id} kuji={kuji} onRemove={onRemoveKuji} />
+              <KujiCard key={kuji.id} kuji={kuji} onRemove={onRemove} />
             ))}
           </ul>
         )}
