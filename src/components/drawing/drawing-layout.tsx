@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import { drawingReducer } from "@/lib/drawing/reducer";
 
 import { AddKujiSection } from "./add-kuji-section";
@@ -12,6 +12,8 @@ export function DrawingLayout() {
   });
   const drawResults = state.results;
   const box = state.box;
+
+  const [formResetKey, setFormResetKey] = useState(0);
 
   const onAdd = (label: string) => {
     const trimmed = label.trim();
@@ -42,17 +44,22 @@ export function DrawingLayout() {
     });
   };
 
+  const onClear = () => {
+    dispatch({ type: "clear" });
+    setFormResetKey((key: number) => key + 1);
+  };
+
   return (
     <div className="drawing-layout">
       <div className="drawing-layout__add">
-        <AddKujiSection onAdd={onAdd} />
+        <AddKujiSection onAdd={onAdd} resetKey={formResetKey} />
       </div>
       <div className="drawing-layout__operations">
         <BoxOperationsSection
           box={box}
           onRemove={(id: string) => dispatch({ type: "removeKuji", id })}
           onDraw={onDraw}
-          onClear={() => dispatch({ type: "clear" })}
+          onClear={onClear}
         />
       </div>
       <div className="drawing-layout__results">

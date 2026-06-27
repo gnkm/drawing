@@ -1,14 +1,19 @@
 import { cardClassName, sectionTitleClassName } from "@/ui";
 import { AddKujiForm } from "./add-kuji-form";
 
-export function AddKujiSection({ onAdd }: { onAdd: (label: string) => void }) {
+type AddKujiSectionProps = {
+  onAdd: (label: string) => void;
+  resetKey: number;
+};
+
+export function AddKujiSection({ onAdd, resetKey }: AddKujiSectionProps) {
   return (
     <section aria-labelledby="add-kuji-heading" className={cardClassName}>
       <h2 className={sectionTitleClassName} id="add-kuji-heading">
         くじを追加
       </h2>
       <div className="mt-4">
-        <AddKujiForm onAdd={onAdd} />
+        <AddKujiForm onAdd={onAdd} resetKey={resetKey} />
       </div>
     </section>
   );

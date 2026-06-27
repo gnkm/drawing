@@ -3,7 +3,12 @@ import { buttonClassName, inputClassName } from "@/ui";
 
 const MAX_LENGTH = 20;
 
-export function AddKujiForm({ onAdd }: { onAdd: (label: string) => void }) {
+type AddKujiFormProps = {
+  onAdd: (label: string) => void;
+  resetKey: number;
+};
+
+export function AddKujiForm({ onAdd, resetKey }: AddKujiFormProps) {
   const [inputValue, setInputValue] = useState("");
   const trimmed = inputValue.trim();
   const isEmpty = trimmed.length === 0;
@@ -12,6 +17,7 @@ export function AddKujiForm({ onAdd }: { onAdd: (label: string) => void }) {
 
   return (
     <form
+      key={resetKey}
       className="space-y-3"
       onSubmit={(e) => {
         e.preventDefault();
@@ -37,7 +43,7 @@ export function AddKujiForm({ onAdd }: { onAdd: (label: string) => void }) {
           spellCheck={true}
           type="text"
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={(e) => setInputValue(e.currentTarget.value)}
         />
         <p className="text-xs text-zinc-500 dark:text-zinc-400">
           1〜{MAX_LENGTH} 文字
