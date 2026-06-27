@@ -91,7 +91,7 @@ function drawingReducer(
 
 ### カスタム Hook
 
-ファイル: `src/app/hooks/use-drawing.ts`
+ファイル: `src/hooks/use-drawing.ts`
 
 `useReducer` をラップし、`App` から使いやすい API を返す。
 
@@ -150,7 +150,7 @@ function createDrawResult(kuji: Kuji, order: number): DrawResult;
 
 ```text
 App                    # useDrawing + formResetKey。state の起点
-└── AppShell                   # 既存。全画面背景
+└── AppShell                   # 全画面背景（src/components/app-shell.tsx）
     └── DrawingLayout          # BoxSection・ResultsSection・ControlPanel を grid で配置
         ├── BoxSection           # props: box, onRemoveKuji
         │   ├── BoxEmptyState
@@ -168,16 +168,17 @@ App                    # useDrawing + formResetKey。state の起点
 
 | コンポーネント | ファイル | 責務 |
 |----------------|----------|------|
-| `App` | `src/app/app.tsx` | `useDrawing` で state を保持。子へ props を配る。`clear` 時に `formResetKey` を更新。 |
-| `DrawingLayout` | `src/app/components/drawing/drawing-layout.tsx` | `BoxSection`・`ResultsSection`・`ControlPanel` を grid で配置するだけ（state を持たない）。配置は CSS で制御し、コンポーネント名に位置を含めない。 |
-| `BoxSection` | `src/app/components/drawing/box-section.tsx` | props: `box`, `onRemoveKuji`。空状態または `KujiCard` リストを表示。 |
-| `KujiCard` | `src/app/components/drawing/kuji-card.tsx` | 単一くじの表示と削除操作。props: `kuji: Kuji`, `onRemove: (id: string) => void`。削除ボタンに `` aria-label={`「${kuji.label}」を削除`} `` を付与。 |
-| `ResultsSection` | `src/app/components/drawing/results-section.tsx` | props: `results`。`aria-live="polite"` で抽選の更新を通知。 |
-| `ResultItem` | `src/app/components/drawing/result-item.tsx` | 順位番号・内容・色を表示。props: `result: DrawResult`。 |
-| `ControlPanel` | `src/app/components/drawing/control-panel.tsx` | フォームと操作ボタンを縦に配置。handlers と disabled 条件を子へ渡す。 |
-| `AddKujiForm` | `src/app/components/drawing/add-kuji-form.tsx` | ローカル `inputText` state。props: `onAdd`, `resetKey`。追加成功時に入力クリア。 |
-| `DrawButton` | `src/app/components/drawing/draw-button.tsx` | props: `onDraw`, `disabled`。 |
-| `ClearButton` | `src/app/components/drawing/clear-button.tsx` | props: `onClear`, `disabled`。 |
+| `App` | `src/app.tsx` | `useDrawing` で state を保持。子へ props を配る。`clear` 時に `formResetKey` を更新。 |
+| `AppShell` | `src/components/app-shell.tsx` | 全画面背景。 |
+| `DrawingLayout` | `src/components/drawing/drawing-layout.tsx` | `BoxSection`・`ResultsSection`・`ControlPanel` を grid で配置するだけ（state を持たない）。配置は CSS で制御し、コンポーネント名に位置を含めない。 |
+| `BoxSection` | `src/components/drawing/box-section.tsx` | props: `box`, `onRemoveKuji`。空状態または `KujiCard` リストを表示。 |
+| `KujiCard` | `src/components/drawing/kuji-card.tsx` | 単一くじの表示と削除操作。props: `kuji: Kuji`, `onRemove: (id: string) => void`。削除ボタンに `` aria-label={`「${kuji.label}」を削除`} `` を付与。 |
+| `ResultsSection` | `src/components/drawing/results-section.tsx` | props: `results`。`aria-live="polite"` で抽選の更新を通知。 |
+| `ResultItem` | `src/components/drawing/result-item.tsx` | 順位番号・内容・色を表示。props: `result: DrawResult`。 |
+| `ControlPanel` | `src/components/drawing/control-panel.tsx` | フォームと操作ボタンを縦に配置。handlers と disabled 条件を子へ渡す。 |
+| `AddKujiForm` | `src/components/drawing/add-kuji-form.tsx` | ローカル `inputText` state。props: `onAdd`, `resetKey`。追加成功時に入力クリア。 |
+| `DrawButton` | `src/components/drawing/draw-button.tsx` | props: `onDraw`, `disabled`。 |
+| `ClearButton` | `src/components/drawing/clear-button.tsx` | props: `onClear`, `disabled`。 |
 
 空状態コンポーネント（`BoxEmptyState`, `ResultsEmptyState`）は対応する Section 内に co-locate しても、独立ファイルにしてもよい。
 
@@ -218,7 +219,7 @@ App                    # useDrawing + formResetKey。state の起点
 1 画面のみのためルーティングライブラリは使わない。`src/main.tsx` が `App` を直接描画する。
 
 ```tsx
-import { App } from "@/app/app";
+import { App } from "@/app";
 
 createRoot(rootElement).render(
   <StrictMode>
@@ -234,21 +235,22 @@ createRoot(rootElement).render(
 ```text
 src/
 ├── main.tsx               # App を描画
-├── app/
-│   ├── app.tsx            # アプリ本体（state の起点）
-│   ├── components/
-│   │   └── drawing/
-│   │       ├── drawing-layout.tsx
-│   │       ├── box-section.tsx
-│   │       ├── kuji-card.tsx
-│   │       ├── results-section.tsx
-│   │       ├── result-item.tsx
-│   │       ├── control-panel.tsx
-│   │       ├── add-kuji-form.tsx
-│   │       ├── draw-button.tsx
-│   │       └── clear-button.tsx
-│   └── hooks/
-│       └── use-drawing.ts
+├── app.tsx                # アプリ本体（state の起点）
+├── ui.ts                  # 共通スタイル定数
+├── components/
+│   ├── app-shell.tsx
+│   └── drawing/
+│       ├── drawing-layout.tsx
+│       ├── box-section.tsx
+│       ├── kuji-card.tsx
+│       ├── results-section.tsx
+│       ├── result-item.tsx
+│       ├── control-panel.tsx
+│       ├── add-kuji-form.tsx
+│       ├── draw-button.tsx
+│       └── clear-button.tsx
+├── hooks/
+│   └── use-drawing.ts
 └── lib/
     └── drawing/
         ├── kuji.ts
@@ -256,7 +258,7 @@ src/
         └── reducer.ts
 ```
 
-既存の `@/app/ui`（`buttonClassName`, `inputClassName`, `cardClassName` 等）を UI スタイルの共通源として再利用する。
+既存の `@/ui`（`buttonClassName`, `inputClassName`, `cardClassName` 等）を UI スタイルの共通源として再利用する。
 
 ## 操作フローと state 遷移
 
