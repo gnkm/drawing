@@ -1,4 +1,6 @@
 {
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
   "biome.enabled": true,
   "biome.lsp.bin": "./node_modules/@biomejs/biome/bin/biome",
   "biome.requireConfiguration": true,
