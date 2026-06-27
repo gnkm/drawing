@@ -7,25 +7,10 @@ type DrawingState = {
 };
 
 type DrawingAction =
-  | { type: "addKuji"; label: string }
+  | { type: "addKuji"; kuji: Kuji }
   | { type: "removeKuji"; id: string }
-  | { type: "drawKuji" }
+  | { type: "drawKuji"; drawnId: string; results: DrawResult }
   | { type: "clear" };
-
-function createKuji(label: string): Kuji {
-  return {
-    id: crypto.randomUUID(),
-    label,
-    color: `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`,
-  };
-}
-
-function createDrawResult(results: DrawResult[], kuji: Kuji): DrawResult {
-  return {
-    order: results.length + 1,
-    kuji: { label: kuji.label, color: kuji.color },
-  };
-}
 
 export function drawingReducer(
   state: DrawingState,
@@ -33,27 +18,18 @@ export function drawingReducer(
 ): DrawingState {
   switch (action.type) {
     case "addKuji":
-      return { ...state, box: [...state.box, createKuji(action.label)] };
+      return { ...state, box: [...state.box, action.kuji] };
     case "removeKuji":
       return {
         ...state,
         box: state.box.filter((kuji) => kuji.id !== action.id),
       };
-    case "drawKuji": {
-      if (state.box.length === 0) {
-        return state;
-      }
-      const index = Math.floor(Math.random() * state.box.length);
-      const drawn = state.box[index];
-      if (!drawn) {
-        return state;
-      }
+    case "drawKuji":
       return {
         ...state,
-        box: state.box.filter((kuji) => kuji.id !== drawn.id),
-        results: [createDrawResult(state.results, drawn), ...state.results],
+        box: state.box.filter((kuji) => kuji.id !== action.drawnId),
+        results: [action.results, ...state.results],
       };
-    }
     case "clear":
       return { ...state, box: [], results: [] };
     default:
