@@ -1,5 +1,5 @@
-import { BoxSection } from "./box-section";
-import { ControlPanel } from "./control-panel";
+import { AddKujiSection } from "./add-kuji-section";
+import { BoxOperationsSection } from "./box-operations-section";
 import { ResultsSection } from "./results-section";
 
 export function DrawingLayout() {
@@ -34,10 +34,16 @@ export function DrawingLayout() {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <ControlPanel />
-      <BoxSection box={box} />
-      <ResultsSection results={drawResults} />
+    <div className="drawing-layout">
+      <div className="drawing-layout__add">
+        <AddKujiSection />
+      </div>
+      <div className="drawing-layout__operations">
+        <BoxOperationsSection box={box} />
+      </div>
+      <div className="drawing-layout__results">
+        <ResultsSection results={drawResults} />
+      </div>
     </div>
   );
 }

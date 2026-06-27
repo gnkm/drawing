@@ -20,3 +20,47 @@
     scroll-behavior: auto;
   }
 }
+
+@layer components {
+  .skip-link {
+    @apply fixed top-4 left-4 z-50 -translate-y-[calc(100%+2rem)] rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white shadow-lg;
+    @apply transition-transform duration-150 motion-reduce:transition-none;
+    @apply focus-visible:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-2;
+    @apply dark:bg-zinc-100 dark:text-zinc-900 dark:focus-visible:ring-zinc-100;
+  }
+
+  /* モバイル: 縦積み、デスクトップ: くじを追加 | くじ操作 | 抽選結果 */
+  .drawing-layout {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "add"
+      "operations"
+      "results";
+  }
+
+  @media (width >= 48rem) {
+    .drawing-layout {
+      gap: 1.25rem;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-areas: "add operations results";
+    }
+  }
+
+  .drawing-layout > * {
+    min-width: 0;
+  }
+
+  .drawing-layout__add {
+    grid-area: add;
+  }
+
+  .drawing-layout__operations {
+    grid-area: operations;
+  }
+
+  .drawing-layout__results {
+    grid-area: results;
+  }
+}
