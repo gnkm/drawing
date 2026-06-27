@@ -28,8 +28,8 @@ pnpm run dev
 
 UI 分割と props 設計のために、データモデルの型だけ先に置く。ロジックはまだ書かない。
 
-- [ ] `src/lib/drawing/kuji.ts` — 型 `Kuji` を export
-- [ ] `src/lib/drawing/draw.ts` — 型 `DrawResult` を export
+- [x] `src/lib/drawing/kuji.ts` — 型 `Kuji` を export
+- [x] `src/lib/drawing/draw.ts` — 型 `DrawResult` を export
 
 コンポーネント階層は architecture.md のツリーを参照する。
 
