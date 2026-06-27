@@ -15,13 +15,14 @@ pnpm run dev
 
 不要なデモとルーティングを削除し、1 画面構成の土台にする。
 
-- [ ] 削除: `src/routes/`、`src/routeTree.gen.ts`
-- [ ] 削除: `src/app/pages/`（counter, form, home 等）
-- [ ] 削除: `src/stores/counter-store.ts`
-- [ ] 削除: ルーター・Zustand 関連のテスト（`src/test/router.test.tsx` 等）
-- [ ] `vite.config.ts` から `@tanstack/router-plugin` を外す
-- [ ] `package.json` から未使用依存（`@tanstack/react-router`、`zustand` 等）を外す
-- [ ] `src/main.tsx` を `App` 直描画に差し替える（architecture.md のエントリポイント参照）
+- [x] 削除: `src/routes/`、`src/routeTree.gen.ts`
+- [x] 削除: `src/app/pages/`（counter, form, home 等）
+- [x] 削除: `src/stores/counter-store.ts`
+- [x] 削除: ルーター・Zustand 関連のテスト（`src/test/router.test.tsx` 等）
+- [x] 削除: MSW 関連（`src/test/msw/`、`msw` 依存）
+- [x] `vite.config.ts` から `@tanstack/router-plugin` を外す
+- [x] `package.json` から未使用依存（`@tanstack/react-router`、`zustand` 等）を外す
+- [x] `src/main.tsx` を `App` 直描画に差し替える（architecture.md のエントリポイント参照）
 
 ## 2. 型の定義（ステップ 1 の補助）
 

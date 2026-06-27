@@ -222,9 +222,7 @@ import { App } from "@/app/app";
 
 createRoot(rootElement).render(
   <StrictMode>
-    <Providers>
-      <App />
-    </Providers>
+    <App />
   </StrictMode>,
 );
 ```

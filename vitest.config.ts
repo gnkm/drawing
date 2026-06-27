@@ -7,11 +7,12 @@ export default mergeConfig(
     test: {
       environment: "happy-dom",
       globals: false,
+      passWithNoTests: true,
       setupFiles: ["./src/test/setup.ts"],
       coverage: {
         provider: "v8",
         reporter: ["text", "html"],
-        exclude: ["**/*.test.{ts,tsx}", "src/test/**", "src/routeTree.gen.ts"],
+        exclude: ["**/*.test.{ts,tsx}", "src/test/**"],
       },
     },
   }),
