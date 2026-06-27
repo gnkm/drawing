@@ -1,3 +1,3 @@
 export function DrawButton() {
-  return null;
+  return <button type="button">Draw</button>;
 }

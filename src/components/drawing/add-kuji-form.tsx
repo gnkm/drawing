@@ -1,3 +1,8 @@
 export function AddKujiForm() {
-  return null;
+  return (
+    <form>
+      <input type="text" />
+      <button type="submit">Add</button>
+    </form>
+  );
 }

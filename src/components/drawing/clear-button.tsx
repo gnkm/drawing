@@ -1,3 +1,3 @@
 export function ClearButton() {
-  return null;
+  return <button type="button">Clear</button>;
 }
