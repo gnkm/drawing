@@ -1,6 +1,10 @@
 # Drawing
 
+[![CI](https://github.com/gnkm/drawing/actions/workflows/ci.yml/badge.svg)](https://github.com/gnkm/drawing/actions/workflows/ci.yml)
+
 **drawing** は、箱にくじを入れてランダムに引き出すシングルページアプリケーション（SPA）です。追加したくじを引き、引き出された順番を画面に表示します。
+
+https://drawing.gnkm.info
 
 ## 前提
 
