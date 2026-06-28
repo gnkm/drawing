@@ -5,10 +5,9 @@ const MAX_LENGTH = 20;
 
 type AddKujiFormProps = {
   onAdd: (label: string) => void;
-  resetKey: number;
 };
 
-export function AddKujiForm({ onAdd, resetKey }: AddKujiFormProps) {
+export function AddKujiForm({ onAdd }: AddKujiFormProps) {
   const [inputValue, setInputValue] = useState("");
   const trimmed = inputValue.trim();
   const isEmpty = trimmed.length === 0;
@@ -17,7 +16,6 @@ export function AddKujiForm({ onAdd, resetKey }: AddKujiFormProps) {
 
   return (
     <form
-      key={resetKey}
       className="space-y-3"
       onSubmit={(e) => {
         e.preventDefault();

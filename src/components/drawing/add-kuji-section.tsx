@@ -13,7 +13,7 @@ export function AddKujiSection({ onAdd, resetKey }: AddKujiSectionProps) {
         くじを追加
       </h2>
       <div className="mt-4">
-        <AddKujiForm onAdd={onAdd} resetKey={resetKey} />
+        <AddKujiForm key={resetKey} onAdd={onAdd} />
       </div>
     </section>
   );
