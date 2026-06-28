@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Drawing</title>
   <path d="M6 4h10c6.63 0 12 5.37 12 12s-5.37 12-12 12H6V4zm6 5v14h4c3.87 0 7-3.13 7-7s-3.13-7-7-7h-4z" fill="#1F2937" fill-rule="evenodd"/>
   <circle cx="24" cy="8" r="3.5" fill="#7C3AED"/>
 </svg>
